@@ -46,8 +46,7 @@ void ini_parser::process_line(const std::string& raw, std::size_t str)
         if (line.back() != ']')
         {
             throw std::runtime_error(
-                "Строка " + std::to_string(str) +
-                ": неправильно сформированный заголовок раздела " + raw + "\"");
+                "Строка " + std::to_string(str) + ": неправильно сформированный заголовок раздела " + raw + "\"");
         }
         current_section_ = trim(line.substr(1, line.size() - 2));
 
@@ -63,16 +62,14 @@ void ini_parser::process_line(const std::string& raw, std::size_t str)
     if (current_section_.empty())
     {
         throw std::runtime_error(
-            "Строка " + std::to_string(str) +
-            ": переменная вне раздела");
+            "Строка " + std::to_string(str) + ": переменная вне раздела");
     }
 
     const std::size_t eq = line.find('=');
     if (eq == std::string::npos)
     {
         throw std::runtime_error(
-            "Строка " + std::to_string(str) +
-            ": ожидалось name = value, получено " + raw);
+            "Строка " + std::to_string(str) + ": ожидалось name = value, получено " + raw);
     }
 
     const std::string name = trim(line.substr(0, eq));
@@ -87,7 +84,7 @@ void ini_parser::process_line(const std::string& raw, std::size_t str)
     if (name.empty())
     {
         throw std::runtime_error(
-            "Line " + std::to_string(str) + ": empty variable name");
+            "Строка " + std::to_string(str) + ": пустое имя");
     }
     data_[current_section_][name] = value;
 }
